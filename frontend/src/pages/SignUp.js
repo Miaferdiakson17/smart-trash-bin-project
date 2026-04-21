@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API from './api'; // import koneksi API
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -7,31 +8,23 @@ function SignUp() {
     password: ''
   });
 
-  // Fungsi signup
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://smart-trash-bin-project.onrender.com/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
+      const response = await API.post('/api/signup', formData);
 
-      const result = await response.json();
-
-      if (response.ok) {
-        alert("Pendaftaran berhasil! Silakan login.");
-        window.location.href = "/";
-      } else {
-        alert(result.message || "Pendaftaran gagal");
-      }
+      alert("Pendaftaran berhasil! Silakan login.");
+      window.location.href = "/";
 
     } catch (error) {
       console.error("Signup Error:", error);
-      alert("Gagal terhubung ke backend!");
+
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Gagal terhubung ke backend!");
+      }
     }
   };
 

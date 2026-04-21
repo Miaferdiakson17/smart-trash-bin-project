@@ -1,43 +1,34 @@
 import React, { useState } from 'react';
+import API from './api';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Fungsi login
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://smart-trash-bin-project.onrender.com/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
+      const response = await API.post('/api/login', {
+        email,
+        password
       });
 
-      const result = await response.json();
+      localStorage.setItem("email_aktif", response.data.email);
+      localStorage.setItem("nama_aktif", response.data.user);
 
-      if (response.ok) {
-        // Simpan data user ke localStorage
-        localStorage.setItem("email_aktif", result.email);
-        localStorage.setItem("nama_aktif", result.user);
+      alert("Login berhasil! Selamat datang " + response.data.user);
 
-        alert("Login Berhasil! Selamat datang " + result.user);
-
-        // Redirect ke dashboard
-        window.location.href = "/dashboard";
-      } else {
-        alert(result.message || "Email atau Password salah");
-      }
+      window.location.href = "/dashboard";
 
     } catch (error) {
       console.error("Login Error:", error);
-      alert("Gagal terhubung ke backend!");
+
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Gagal terhubung ke backend!");
+      }
     }
   };
 
