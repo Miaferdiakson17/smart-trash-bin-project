@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
-// Semua request frontend akan diarahkan ke backend Render
 const API = axios.create({
-  baseURL: "https://smart-trash-bin-project.onrender.com"
+  // GANTI BARIS DI BAWAH INI DENGAN LINK RENDER KAMU
+  baseURL: 'https://smart-trash-bin-project.onrender.com', 
 });
 
 export default API;
