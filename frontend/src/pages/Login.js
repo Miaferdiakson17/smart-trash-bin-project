@@ -13,7 +13,7 @@ function Login() {
     try {
       /*
         Mengirim data login ke backend:
-        POST https://smart-trash-bin-project.onrender.com/api/login
+        https://smart-trash-bin-project.onrender.com/api/login
       */
       const response = await API.post('/api/login', {
         email: email,

@@ -16,7 +16,7 @@ function SignUp() {
     try {
       /*
         Mengirim data signup ke backend:
-        POST https://smart-trash-bin-project.onrender.com/api/signup
+        https://smart-trash-bin-project.onrender.com/api/signup
       */
       await API.post('/api/signup', formData);
 
