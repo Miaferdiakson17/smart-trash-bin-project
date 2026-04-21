@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
-import API from './api'; // import koneksi API
+import API from './api'; // Import koneksi API
 
 function SignUp() {
+  // State untuk menyimpan data form signup
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   });
 
+  // Fungsi signup saat tombol ditekan
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await API.post('/api/signup', formData);
+      /*
+        Mengirim data signup ke backend:
+        POST https://smart-trash-bin-project.onrender.com/api/signup
+      */
+      await API.post('/api/signup', formData);
 
       alert("Pendaftaran berhasil! Silakan login.");
+
+      // Setelah signup berhasil, kembali ke login
       window.location.href = "/";
 
     } catch (error) {
@@ -32,7 +40,10 @@ function SignUp() {
     <div>
       <h2>Daftar Admin</h2>
 
+      {/* Form signup */}
       <form onSubmit={handleSignUp}>
+        
+        {/* Input nama */}
         <input
           type="text"
           placeholder="Nama lengkap"
@@ -42,6 +53,9 @@ function SignUp() {
           required
         />
 
+        <br /><br />
+
+        {/* Input email */}
         <input
           type="email"
           placeholder="Masukkan email"
@@ -51,6 +65,9 @@ function SignUp() {
           required
         />
 
+        <br /><br />
+
+        {/* Input password */}
         <input
           type="password"
           placeholder="Masukkan password"
@@ -60,6 +77,9 @@ function SignUp() {
           required
         />
 
+        <br /><br />
+
+        {/* Tombol daftar */}
         <button type="submit">Daftar</button>
       </form>
 
