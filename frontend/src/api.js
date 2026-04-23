@@ -1,8 +1,5 @@
-import axios from 'axios';
+// GANTI DARI INI:
+// const BASE_URL = "http://127.0.0.1:5000"; 
 
-const API = axios.create({
-  // Pastikan pakai link .onrender.com kamu, BUKAN localhost
-  baseURL: 'https://smart-trash-bin-project.onrender.com', 
-});
-
-export default API;
+// MENJADI INI (Pakai link Render kamu):
+const BASE_URL = "https://smart-trash-bin-project.onrender.com";
