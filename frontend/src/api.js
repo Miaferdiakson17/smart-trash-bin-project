@@ -1,5 +1,7 @@
-// GANTI DARI INI:
-// const BASE_URL = "http://127.0.0.1:5000"; 
+import axios from 'axios';
 
-// MENJADI INI (Pakai link Render kamu):
-const BASE_URL = "https://smart-trash-bin-project.onrender.com";
+const API = axios.create({
+    baseURL: 'https://smart-trash-bin-project.onrender.com' 
+});
+
+export default API;
