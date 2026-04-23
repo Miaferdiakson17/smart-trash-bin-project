@@ -1,33 +1,35 @@
 import React, { useState } from 'react';
-import API from './api'; // Import koneksi API
+import apiService from './services/APIService';
 
+/*
+=====================================================
+CLASS SIGNUP PAGE
+=====================================================
+*/
 function SignUp() {
-  // State untuk menyimpan data form signup
+  // State form register
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   });
 
-  // Fungsi signup saat tombol ditekan
+  /*
+  =====================================================
+  HANDLE REGISTER
+  =====================================================
+  */
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     try {
-      /*
-        Mengirim data signup ke backend:
-        https://smart-trash-bin-project.onrender.com/api/signup
-      */
-      await API.post('/api/SignUp', formData);
+      // Kirim data ke backend
+      await apiService.signup(formData);
 
-      alert("Pendaftaran berhasil! Silakan login.");
-
-      // Setelah signup berhasil, kembali ke login
+      alert("Pendaftaran berhasil!");
       window.location.href = "/";
 
     } catch (error) {
-      console.error("Signup Error:", error);
-
       if (error.response) {
         alert(error.response.data.message);
       } else {
@@ -40,13 +42,11 @@ function SignUp() {
     <div>
       <h2>Daftar Admin</h2>
 
-      {/* Form signup */}
       <form onSubmit={handleSignUp}>
-        
         {/* Input nama */}
         <input
           type="text"
-          placeholder="Nama lengkap"
+          placeholder="Nama Lengkap"
           onChange={(e) =>
             setFormData({ ...formData, name: e.target.value })
           }
@@ -58,7 +58,7 @@ function SignUp() {
         {/* Input email */}
         <input
           type="email"
-          placeholder="Masukkan email"
+          placeholder="Masukkan Email"
           onChange={(e) =>
             setFormData({ ...formData, email: e.target.value })
           }
@@ -70,7 +70,7 @@ function SignUp() {
         {/* Input password */}
         <input
           type="password"
-          placeholder="Masukkan password"
+          placeholder="Masukkan Password"
           onChange={(e) =>
             setFormData({ ...formData, password: e.target.value })
           }
@@ -79,7 +79,6 @@ function SignUp() {
 
         <br /><br />
 
-        {/* Tombol daftar */}
         <button type="submit">Daftar</button>
       </form>
 

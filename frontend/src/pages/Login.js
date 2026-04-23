@@ -1,49 +1,38 @@
 import React, { useState } from 'react';
-import API from './api'; // Import koneksi API
+import apiService from './services/APIService';
 
+/*
+=====================================================
+CLASS LOGIN PAGE
+=====================================================
+*/
 function Login() {
-  // State untuk menyimpan input email dan password
+  // State input email dan password
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Fungsi login saat tombol ditekan
+  /*
+  =====================================================
+  HANDLE LOGIN
+  =====================================================
+  */
   const handleLogin = async (e) => {
-    e.preventDefault(); // Mencegah reload halaman
+    e.preventDefault();
 
     try {
-      /*
-        Mengirim data login ke backend:
-        https://smart-trash-bin-project.onrender.com/api/login
-      */
-      const response = await API.post('/api/login', {
-        email: email,
-        password: password
-      });
+      // Kirim email dan password ke backend
+      const response = await apiService.login(email, password);
 
-      /*
-        Jika login berhasil, backend akan mengirim:
-        {
-          user: "...",
-          email: "..."
-        }
-      */
-
-      // Simpan data login ke localStorage
+      // Simpan data admin ke localStorage
       localStorage.setItem("email_aktif", response.data.email);
       localStorage.setItem("nama_aktif", response.data.user);
 
-      alert("Login berhasil! Selamat datang " + response.data.user);
+      alert("Login berhasil!");
 
-      // Pindah ke halaman dashboard
+      // Pindah ke dashboard
       window.location.href = "/dashboard";
 
     } catch (error) {
-      console.error("Login Error:", error);
-
-      /*
-        Jika backend mengirim error seperti:
-        "Email atau Password salah"
-      */
       if (error.response) {
         alert(error.response.data.message);
       } else {
@@ -56,13 +45,11 @@ function Login() {
     <div>
       <h2>Login Admin</h2>
 
-      {/* Form login */}
       <form onSubmit={handleLogin}>
-        
         {/* Input email */}
         <input
           type="email"
-          placeholder="Masukkan email"
+          placeholder="Masukkan Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -73,7 +60,7 @@ function Login() {
         {/* Input password */}
         <input
           type="password"
-          placeholder="Masukkan password"
+          placeholder="Masukkan Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -81,7 +68,6 @@ function Login() {
 
         <br /><br />
 
-        {/* Tombol login */}
         <button type="submit">Login</button>
       </form>
 
