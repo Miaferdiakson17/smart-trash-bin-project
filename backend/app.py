@@ -19,7 +19,7 @@ class SmartBinAPI:
         self.url = "https://hjxdtogcfmutvjcxgkja.supabase.co"
 
         # API Key Supabase
-        self.key = "YOUR_SUPABASE_KEY"
+        self.key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqeGR0b2djZm11dHZqY3hna2phIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMTkyMjMsImV4cCI6MjA5MDg5NTIyM30.VXaQArfBgNPiMu2S3E9YuGC6y3PdgIupaCiKU0EEbJY"
 
         try:
             # Membuat koneksi ke database Supabase

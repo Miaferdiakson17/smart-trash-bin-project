@@ -18,7 +18,7 @@ function SignUp() {
         Mengirim data signup ke backend:
         https://smart-trash-bin-project.onrender.com/api/signup
       */
-      await API.post('/api/signup', formData);
+      await API.post('/api/SignUp', formData);
 
       alert("Pendaftaran berhasil! Silakan login.");
 
